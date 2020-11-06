@@ -1,0 +1,4698 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "DTMSCP-DB is a REST-API that forms the persistence layer for automation.  The documentation below is expected to help with learning the API.",
+    "title": "DTMSCP-DB API.",
+    "contact": {
+      "name": "Joel Larkin",
+      "email": "joel.larkin@dell.com"
+    },
+    "version": "1.4.4"
+  },
+  "basePath": "/",
+  "paths": {
+    "/api/configtype/all": {
+      "get": {
+        "description": "returns configtypes or else No Content Found 204 will be returned.",
+        "tags": [
+          "configtype"
+        ],
+        "summary": "Gets all ConfigType records, returns an array",
+        "operationId": "getAllConfigTypes",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/configTypeResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/configtype/new": {
+      "post": {
+        "description": "If the ConfigType is created 201 is returned.",
+        "tags": [
+          "configtype"
+        ],
+        "summary": "Creates a new configtype object.  ConfigType objects tie together Exports to A Configtype to the device class they service.",
+        "operationId": "createConfigType",
+        "parameters": [
+          {
+            "description": "ConfigType Var JSON Object",
+            "name": "devicevar",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigType"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/configTypeResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/configtype/{id}": {
+      "get": {
+        "description": "returns configtype or else No Content Found 204 will be returned.",
+        "tags": [
+          "configtype"
+        ],
+        "summary": "Gets a specific ConfigType returns a specific configtype",
+        "operationId": "getConfigType",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the ConfigType",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/configTypeResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the configtype is updated, returns 200 if update fails returns 400",
+        "tags": [
+          "configtype"
+        ],
+        "summary": "Updates a configtype Object",
+        "operationId": "updateConfigType",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the configtype var object",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "configtype Parameters",
+            "name": "configtype",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/configTypeResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the configtype is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "configtype"
+        ],
+        "summary": "Delete a configtype by the id.",
+        "operationId": "deleteConfigType",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the configtype",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/configtypesubcomponent/all": {
+      "get": {
+        "description": "returns configtypesubcomponents or else No Content Found 204 will be returned.",
+        "tags": [
+          "configtypesubcomponent"
+        ],
+        "summary": "Gets all ConfigTypesubcomponent records, returns an array",
+        "operationId": "getAllConfigTypesubcomponents",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/configTypeSubcomponentsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/configtypesubcomponent/new": {
+      "post": {
+        "description": "If the ConfigTypesubcomponent is created 201 is returned.",
+        "tags": [
+          "configtypesubcomponent"
+        ],
+        "summary": "Creates a new configtypesubcomponent object.  ConfigTypesubcomponent objects tie together configtypesubcomponents wth configtypesubcomponent types.",
+        "operationId": "createConfigTypesubcomponent",
+        "parameters": [
+          {
+            "description": "ConfigTypesubcomponent Var JSON Object",
+            "name": "devicevar",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigTypeSubcomponent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/configTypeSubcomponentResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/configtypesubcomponent/{id}": {
+      "get": {
+        "description": "returns configtypesubcomponent or else No Content Found 204 will be returned.",
+        "tags": [
+          "configtypesubcomponent"
+        ],
+        "summary": "Gets a specific ConfigTypesubcomponent returns a specific configtypesubcomponent",
+        "operationId": "getConfigTypesubcomponent",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the ConfigTypesubcomponent",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/configTypeSubcomponentResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the configtypesubcomponent is updated, returns 200 if update fails returns 400",
+        "tags": [
+          "configtypesubcomponent"
+        ],
+        "summary": "Updates a configtypesubcomponent Object",
+        "operationId": "updateConfigTypesubcomponent",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the configtypesubcomponent var object",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "configtypesubcomponent Parameters",
+            "name": "configtypesubcomponent",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigTypeSubcomponent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/configTypeSubcomponentResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the configtypesubcomponent is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "configtypesubcomponent"
+        ],
+        "summary": "Delete a configtypesubcomponent by the id.",
+        "operationId": "deleteConfigTypesubcomponent",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the configtypesubcomponent",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/device/all": {
+      "get": {
+        "description": "returns Devices or else No Content Found 204 will be returned.",
+        "tags": [
+          "device"
+        ],
+        "summary": "Gets all Devices",
+        "operationId": "getAllDevices",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/devicesResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/device/new": {
+      "post": {
+        "description": "If the Device is created 201 is returned.",
+        "tags": [
+          "device"
+        ],
+        "summary": "Creates a new Device.",
+        "operationId": "createDevice",
+        "parameters": [
+          {
+            "description": "Device Parameters",
+            "name": "device",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/deviceResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/device/{id}": {
+      "get": {
+        "description": "If the Device is found, site will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "device"
+        ],
+        "summary": "Return an Device by the id.",
+        "operationId": "getDevice",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the Device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the device is found, site will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "device"
+        ],
+        "summary": "Updates a device specified by the id.",
+        "operationId": "updateDevice",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "device JSON object",
+            "name": "device",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the device is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "device"
+        ],
+        "summary": "Delete a device by the id.",
+        "operationId": "deleteDevice",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/deviceclass/all": {
+      "get": {
+        "description": "returns deviceclasses or else No Content Found 204 will be returned.",
+        "tags": [
+          "deviceclass"
+        ],
+        "summary": "Gets all DeviceClasses",
+        "operationId": "GetDeviceClasses",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceClassesResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/deviceclass/new": {
+      "post": {
+        "description": "If the Device is created 201 is returned.",
+        "tags": [
+          "deviceclass"
+        ],
+        "summary": "Creates a new Device Class.",
+        "operationId": "CreateDeviceClass",
+        "parameters": [
+          {
+            "description": "Device Parameters",
+            "name": "deviceclass",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceClass"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/deviceClassResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/deviceclass/{id}": {
+      "get": {
+        "description": "If the Device is found, site will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "deviceclass"
+        ],
+        "summary": "Return a DeviceClass specified by the id.",
+        "operationId": "GetDeviceClass",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the Device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceClassResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the DeviceClass is found, DeviceClass will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "deviceclass"
+        ],
+        "summary": "Updates a DeviceClass specified by the id.",
+        "operationId": "UpdateDeviceClass",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the DeviceClass",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Device Class Parameters",
+            "name": "deviceclass",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceClass"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceClassResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the deviceclass is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "deviceclass"
+        ],
+        "summary": "Delete a deviceclass by the id.",
+        "operationId": "deleteDeviceClass",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the deviceclass",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/devicegroup/all": {
+      "get": {
+        "description": "returns device groups or else No Content Found 204 will be returned.",
+        "tags": [
+          "devicegroup"
+        ],
+        "summary": "Gets all Device Groups",
+        "operationId": "getAllDeviceGroup",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceGroupsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/devicegroup/assign": {
+      "put": {
+        "description": "If the DeviceGroup assignment succeeds it will 200, if failed return a 400.",
+        "tags": [
+          "devicegroup"
+        ],
+        "summary": "Assign a Device to a DeviceGroup by passing the UUID's of each",
+        "operationId": "assignToDeviceGroup",
+        "parameters": [
+          {
+            "description": "id of the DeviceGroup",
+            "name": "id",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceGroupLookup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/devicegroup/new": {
+      "post": {
+        "description": "If the Device Group is created 201 is returned.",
+        "tags": [
+          "devicegroup"
+        ],
+        "summary": "Creates an Device Group.",
+        "operationId": "createDeviceGroup",
+        "parameters": [
+          {
+            "description": "Device Group Parameters",
+            "name": "devicegroup",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/deviceGroupResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/devicegroup/unassign": {
+      "put": {
+        "description": "If the Unassignment succeeds it will 200, if failed return a 400.",
+        "tags": [
+          "devicegroup"
+        ],
+        "summary": "Delete a DeviceGroup Assignment by passing the UUID's of a device group and device.",
+        "operationId": "removeFromDeviceGroup",
+        "parameters": [
+          {
+            "description": "id of the DeviceGroup",
+            "name": "id",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceGroupLookup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/devicegroup/{id}": {
+      "get": {
+        "description": "If the DeviceGroup is found, DeviceGroup will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "devicegroup"
+        ],
+        "summary": "Return an Device Group specified by the id.",
+        "operationId": "getDeviceGroup",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the Device Group",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceGroupResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the DeviceGroup is updated, returns 200 if update fails returns 400",
+        "tags": [
+          "devicegroup"
+        ],
+        "summary": "Updates a DeviceGroup Object",
+        "operationId": "updateDeviceGroup",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the group var object",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "devicegroup Parameters",
+            "name": "devicegroup",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceGroupResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the DeviceGroup is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "devicegroup"
+        ],
+        "summary": "Delete a DeviceGroup by the id.",
+        "operationId": "deleteDeviceGroup",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the DeviceGroup",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/devicevar/all": {
+      "get": {
+        "description": "returns devicevars or else No Content Found 204 will be returned.",
+        "tags": [
+          "devicevar"
+        ],
+        "summary": "Gets all Device Variables, returns an array",
+        "operationId": "getAllDeviceVars",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceVarResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/devicevar/device/{id}": {
+      "get": {
+        "description": "returns devicevars or else No Content Found 204 will be returned.",
+        "tags": [
+          "devicevar"
+        ],
+        "summary": "Gets all Device Variables for a specific device, returns an array",
+        "operationId": "getAllDeviceVarsByRegion",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the Region",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceVarsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/devicevar/new": {
+      "post": {
+        "description": "If the Device Variable is created 201 is returned.",
+        "tags": [
+          "devicevar"
+        ],
+        "summary": "Creates an Device Variable.",
+        "operationId": "createDeviceVar",
+        "parameters": [
+          {
+            "description": "Device Var JSON Object",
+            "name": "devicevar",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceVar"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/deviceVarResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/devicevar/{id}": {
+      "get": {
+        "description": "If the devicevar is found, devicevar will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "devicevar"
+        ],
+        "summary": "Return an devicevar by the id.",
+        "operationId": "getDeviceVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the devicevar",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceVarResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the DeviceGroup is updated, returns 200 if update fails returns 400",
+        "tags": [
+          "devicevar"
+        ],
+        "summary": "Updates a devicevar Object",
+        "operationId": "updateDeviceVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the group var object",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "DeviceVar Parameters",
+            "name": "devicevar",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceVar"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceVarResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the devicevar is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "devicevar"
+        ],
+        "summary": "Delete a devicevar by the id.",
+        "operationId": "deleteDeviceVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the devicevar",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/exporter/all": {
+      "get": {
+        "description": "returns configs or else No Content Found 204 will be returned.",
+        "tags": [
+          "exporter"
+        ],
+        "summary": "Gets all Exporters records, returns an array",
+        "operationId": "getAllExporters",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/exportersResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/exporter/new": {
+      "post": {
+        "description": "If the Config is created 201 is returned.",
+        "tags": [
+          "exporter"
+        ],
+        "summary": "Creates a new config object.  Config objects tie together configs wth config types.",
+        "operationId": "createExporter",
+        "parameters": [
+          {
+            "description": "Config Var JSON Object",
+            "name": "devicevar",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Exporter"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/exporterResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/exporter/{id}": {
+      "get": {
+        "description": "returns config or else No Content Found 204 will be returned.",
+        "tags": [
+          "exporter"
+        ],
+        "summary": "Gets a specific Exporter returns a specific Exporter",
+        "operationId": "getExporter",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the Exporter",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/exporterResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the config is updated, returns 200 if update fails returns 400",
+        "tags": [
+          "exporter"
+        ],
+        "summary": "Updates a config Object",
+        "operationId": "updateExporter",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the config var object",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "config Parameters",
+            "name": "config",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Exporter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/exporterResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the config is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "exporter"
+        ],
+        "summary": "Delete a config by the id.",
+        "operationId": "deleteExporter",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the config",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/groupvar/all": {
+      "get": {
+        "description": "returns groupvars or else No Content Found 204 will be returned.",
+        "tags": [
+          "groupvar"
+        ],
+        "summary": "Gets all GroupVars",
+        "operationId": "getAllGroupVars",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/groupVarsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/groupvar/group/{id}": {
+      "get": {
+        "description": "returns groupvars or else No Content Found 204 will be returned.",
+        "tags": [
+          "groupvar"
+        ],
+        "summary": "Gets all GroupVars for a specific group",
+        "operationId": "getAllGroupVarsByGroup",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the Group",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/groupVarsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/groupvar/new": {
+      "post": {
+        "description": "If the GroupVar is created 201 is returned.",
+        "tags": [
+          "groupvar"
+        ],
+        "summary": "Creates an GroupVar Entry which relates the variable to a specific DeviceGroup.",
+        "operationId": "createGroupVar",
+        "parameters": [
+          {
+            "description": "GroupVar Parameters",
+            "name": "groupvar",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupVar"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/groupVarResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/groupvar/{id}": {
+      "get": {
+        "description": "If the GroupVar is found, GroupVar will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "groupvar"
+        ],
+        "summary": "Return an GroupVar by the id.",
+        "operationId": "getGroupVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the GroupVar",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/groupVarResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the groupvar is updated, returns 200 if update fails returns 400",
+        "tags": [
+          "groupvar"
+        ],
+        "summary": "Updates a GroupVar Object",
+        "operationId": "updateGroupVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the group var object",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "GroupVar Parameters",
+            "name": "groupvar",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupVar"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/groupVarResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the groupvar is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "groupvar"
+        ],
+        "summary": "Delete a groupvar by the id.",
+        "operationId": "deleteGroupVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the groupvar",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/rack/all": {
+      "get": {
+        "description": "returns configtypesubcomponents or else No Content Found 204 will be returned.",
+        "tags": [
+          "rack"
+        ],
+        "summary": "Gets all rack records, returns an array",
+        "operationId": "getAllRacks",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/racksResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/rack/new": {
+      "post": {
+        "description": "If the rack is created 201 is returned.",
+        "tags": [
+          "rack"
+        ],
+        "summary": "Creates a new rack object.",
+        "operationId": "createRack",
+        "parameters": [
+          {
+            "description": "rack Var JSON Object",
+            "name": "rack",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Rack"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/rackResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/rack/{id}": {
+      "get": {
+        "description": "returns rack or else No Content Found 204 will be returned.",
+        "tags": [
+          "rack"
+        ],
+        "summary": "Gets a specific rack returns a specific rack",
+        "operationId": "getRack",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the rack",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/rackResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the rack is updated, returns 200 if update fails returns 400",
+        "tags": [
+          "rack"
+        ],
+        "summary": "Updates a rack Object",
+        "operationId": "updateRack",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the rack var object",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "rack Parameters",
+            "name": "rack",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Rack"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/rackResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the rack is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "rack"
+        ],
+        "summary": "Delete a rack by the id.",
+        "operationId": "deleteRack",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the rack",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/rackassignment/all": {
+      "get": {
+        "description": "returns configtypesubcomponents or else No Content Found 204 will be returned.",
+        "tags": [
+          "rackAssignment"
+        ],
+        "summary": "Gets all rackAssignments records, returns an array",
+        "operationId": "getAllRackAssignments",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/rackAssignmentsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/rackassignment/new": {
+      "post": {
+        "description": "If the rackAssignment is created 201 is returned.",
+        "tags": [
+          "rackAssignment"
+        ],
+        "summary": "Creates a new rackAssignment object.",
+        "operationId": "createRackAssignment",
+        "parameters": [
+          {
+            "description": "rackAssignment Var JSON Object",
+            "name": "rackAssignment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RackAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/rackAssignmentResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/rackassignment/{id}": {
+      "get": {
+        "description": "returns rackAssignment or else No Content Found 204 will be returned.",
+        "tags": [
+          "rackAssignment"
+        ],
+        "summary": "Gets a specific rackAssignment returns a specific rackAssignment",
+        "operationId": "getRackAssignment",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the rackAssignment",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/rackAssignmentResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the rackAssignment is updated, returns 200 if update fails returns 400",
+        "tags": [
+          "rackAssignment"
+        ],
+        "summary": "Updates a rackAssignment Object",
+        "operationId": "updaterackAssignment",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the rackAssignment var object",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "rackAssignment Parameters",
+            "name": "rackAssignment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RackAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/rackAssignmentResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the rackAssignment is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "rackAssignment"
+        ],
+        "summary": "Delete a rackAssignment by the id.",
+        "operationId": "deleterackAssignment",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the rackAssignment",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/region/all": {
+      "get": {
+        "description": "returns Regions or else No Content Found 204 will be returned.",
+        "tags": [
+          "region"
+        ],
+        "summary": "Gets all Regions",
+        "operationId": "GetRegions",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/regionsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/region/new": {
+      "post": {
+        "description": "If the Region is created 201 is returned.",
+        "tags": [
+          "region"
+        ],
+        "summary": "Creates a new Region.",
+        "operationId": "CreateRegion",
+        "parameters": [
+          {
+            "description": "region Parameters",
+            "name": "region",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Region"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/regionResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/region/{id}": {
+      "get": {
+        "description": "If the region is found, region will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "region"
+        ],
+        "summary": "Return an region by the id.",
+        "operationId": "GetRegion",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the region",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/regionResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the region is found, site will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "region"
+        ],
+        "summary": "Updates a region specified by the id.",
+        "operationId": "updateRegion",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the device",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "region JSON object",
+            "name": "region",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Region"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deviceResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the region is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "region"
+        ],
+        "summary": "Delete a region by the id.",
+        "operationId": "deleteRegion",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the region",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/regionvar/all": {
+      "get": {
+        "description": "returns regionvars or else No Content Found 204 will be returned.",
+        "tags": [
+          "regionvar"
+        ],
+        "summary": "Gets all Region Variables, returns an array",
+        "operationId": "getAllRegionVars",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/regionVarsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/regionvar/new": {
+      "post": {
+        "description": "If the Region Variable is created 201 is returned.",
+        "tags": [
+          "regionvar"
+        ],
+        "summary": "Creates an Region Variable.",
+        "operationId": "createRegionVar",
+        "parameters": [
+          {
+            "description": "Region Var JSON Object",
+            "name": "regionvar",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionVar"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/regionVarResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/regionvar/region/{id}": {
+      "get": {
+        "description": "returns regionvars or else No Content Found 204 will be returned.",
+        "tags": [
+          "regionvar"
+        ],
+        "summary": "Gets all Region Variables for a specific region, returns an array",
+        "operationId": "getAllRegionVarsByRegion",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the Region",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/regionVarsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/regionvar/{id}": {
+      "get": {
+        "description": "If the regionvar is found, regionvar will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "regionvar"
+        ],
+        "summary": "Return an regionvar by the id.",
+        "operationId": "getRegionVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the regionvar",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/regionVarResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the DeviceGroup is updated, returns 200 if update fails returns 400",
+        "tags": [
+          "regionvar"
+        ],
+        "summary": "Updates a regionvar Object",
+        "operationId": "updateRegionVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the group var object",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "RegionVar Parameters",
+            "name": "regionvar",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionVar"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/regionVarResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the regionvar is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "regionvar"
+        ],
+        "summary": "Delete a regionvar by the id.",
+        "operationId": "deleteRegionVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the regionvar",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/site/all": {
+      "get": {
+        "description": "returns sites or else No Content Found 204 will be returned.",
+        "tags": [
+          "site"
+        ],
+        "summary": "Gets all sites",
+        "operationId": "getAllSites",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/sitesRes"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/site/new": {
+      "post": {
+        "description": "If the site is found, site will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "site"
+        ],
+        "summary": "Creates an Site by the id.",
+        "operationId": "createSite",
+        "parameters": [
+          {
+            "description": "Site Parameters",
+            "name": "site",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/siteRes"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/site/{id}": {
+      "get": {
+        "description": "If the site is found, site will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "site"
+        ],
+        "summary": "Return an Site by the id.",
+        "operationId": "getSite",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the site",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/siteRes"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the site is found, site will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "site"
+        ],
+        "summary": "Updates a Site specified by the id.",
+        "operationId": "updateSite",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the site",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Site Parameters",
+            "name": "site",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/siteRes"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the site is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "site"
+        ],
+        "summary": "Delete a Site by the id.",
+        "operationId": "deleteSite",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the site",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/sitevar/all": {
+      "get": {
+        "description": "returns sitevars or else No Content Found 204 will be returned.",
+        "tags": [
+          "sitevar"
+        ],
+        "summary": "Gets all sitevars",
+        "operationId": "getAllSiteVars",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/siteVarsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/sitevar/new": {
+      "post": {
+        "description": "If the sitevar is created 201 is returned.",
+        "tags": [
+          "sitevar"
+        ],
+        "summary": "Creates an sitevar Entry.",
+        "operationId": "createSiteVar",
+        "parameters": [
+          {
+            "description": "sitevar Parameters",
+            "name": "sitevar",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteVar"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/siteVarResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/sitevar/site/{id}": {
+      "get": {
+        "description": "If the sitevar is found, site will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "sitevar"
+        ],
+        "summary": "Return all the sitevar's for a specific site.",
+        "operationId": "getAllSiteVarsBySite",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the site to get all variables for",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/siteVarResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/sitevar/{id}": {
+      "get": {
+        "description": "If the sitevar is found, site will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "sitevar"
+        ],
+        "summary": "Return an sitevar by the id.",
+        "operationId": "getSiteVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the sitevar",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/siteVarResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the sitevar is found, sitevar will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "sitevar"
+        ],
+        "summary": "Updates a sitevar specified by the id.",
+        "operationId": "updateSiteVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the sitevar",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "sitevar JSON object",
+            "name": "sitevar",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteVar"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/siteVarResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the sitevar is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "sitevar"
+        ],
+        "summary": "Delete a sitevar by the id.",
+        "operationId": "deleteSiteVar",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the sitevar",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/tag/all": {
+      "get": {
+        "description": "returns Tags or else No Content Found 204 will be returned.",
+        "tags": [
+          "tag"
+        ],
+        "summary": "Gets all Tags, returns an array",
+        "operationId": "GetAllTags",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/tagsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/tag/new": {
+      "post": {
+        "description": "If the Tag is created 201 is returned.",
+        "tags": [
+          "tag"
+        ],
+        "summary": "Creates a new Tag",
+        "operationId": "CreateTag",
+        "parameters": [
+          {
+            "description": "Tag Object",
+            "name": "tag",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/tagResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/tag/{id}": {
+      "get": {
+        "description": "If the tag is found, tag will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "tag"
+        ],
+        "summary": "Return an tag by the id.",
+        "operationId": "GetTag",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the tag",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/tagResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the Tag is updated, returns 200 if update fails returns 400",
+        "tags": [
+          "tag"
+        ],
+        "summary": "Updates a tag Object",
+        "operationId": "UpdateTag",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the tag object",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Tag Parameters",
+            "name": "tag",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/tagResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the tag is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "tag"
+        ],
+        "summary": "Delete a tag by the id.",
+        "operationId": "DeleteTag",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the tag",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/tagassignment/all": {
+      "get": {
+        "description": "returns Tag Assignmentss or else No Content Found 204 will be returned.",
+        "tags": [
+          "tagassignment"
+        ],
+        "summary": "Gets all TagAssignments, returns an array",
+        "operationId": "GetAllTagAssignments",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/tagAssignmentsResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          }
+        }
+      }
+    },
+    "/api/tagassignment/new": {
+      "post": {
+        "description": "If the TagAssignment is created 201 is returned.",
+        "tags": [
+          "tagassignment"
+        ],
+        "summary": "Creates a new Tag Assignment",
+        "operationId": "CreateTagAssignment",
+        "parameters": [
+          {
+            "description": "Tag Assignment Object",
+            "name": "tag",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/tagAssignmentResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/tagassignment/{id}": {
+      "get": {
+        "description": "If the tagassignment is found, tagassignment will be returned else No Content Found 204 will be returned.",
+        "tags": [
+          "tagassignment"
+        ],
+        "summary": "Return an tagassignment by the id.",
+        "operationId": "GetTagAssignment",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the tag assignment",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/tagAssignmentResp"
+          },
+          "204": {
+            "$ref": "#/responses/noContentReq"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "put": {
+        "description": "If the Tag is updated, returns 200 if update fails returns 400",
+        "tags": [
+          "tagassignment"
+        ],
+        "summary": "Updates a tagassignment Object",
+        "operationId": "UpdateTagAssignment",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the tagassignment object",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Tag Parameters",
+            "name": "tagassignment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/tagAssignmentResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "delete": {
+        "description": "If the tagassignment is deleted it will 200, if failed return a 400.",
+        "tags": [
+          "tagassignment"
+        ],
+        "summary": "Delete a tagassignment by the id.",
+        "operationId": "DeleteTagAssignment",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id of the tag assignment",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/deletedResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/user/login": {
+      "post": {
+        "description": "If the login succeeds returns a 200 and the token",
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs in to the DB.",
+        "operationId": "Authenticate",
+        "parameters": [
+          {
+            "description": "Site Parameters",
+            "name": "UserLogin",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/loginRes"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    },
+    "/api/user/new": {
+      "post": {
+        "description": "If account creation is success, account will be returned with Created (201).",
+        "tags": [
+          "user"
+        ],
+        "summary": "Creates a new account.",
+        "operationId": "CreateAccount",
+        "parameters": [
+          {
+            "description": "account to add to the list of accounts",
+            "name": "account",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/createdResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Account": {
+      "description": "Account a struct to rep user account",
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "email": {
+          "type": "string",
+          "x-go-name": "Email"
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "is_ldap": {
+          "type": "boolean",
+          "x-go-name": "IsLDAP"
+        },
+        "last_login": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "LastLogin"
+        },
+        "last_refresh": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "LastRefresh"
+        },
+        "password": {
+          "type": "string",
+          "x-go-name": "Password"
+        },
+        "token": {
+          "type": "string",
+          "x-go-name": "Token"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "ConfigType": {
+      "description": "A configtype is the object that includes a \"name\" field which generates the config name in timemachine.\nIt also links to the devices by establishing the \"device_class_id\" the configtype applies to.\n\nAn exporter links to a site \u0026 configtype.  A config type links to configtypesubcompoments and devices.",
+      "type": "object",
+      "title": "ConfigType represents a object that ties the exporter to the devices through the device_class_id in ConfigType",
+      "required": [
+        "name",
+        "device_class_id"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "device_class_id": {
+          "description": "Device Class ID of the class the exporter aligns to/services.",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "DeviceClassID"
+        },
+        "has_subcomponents": {
+          "description": "Has sub components True or False",
+          "type": "boolean",
+          "x-go-name": "HasSubcomponent"
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Friendly Name of the ConfigType",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "notes": {
+          "description": "Notes on the ConfigType",
+          "type": "string",
+          "x-go-name": "Notes"
+        },
+        "schema": {
+          "description": "schema for configtype (blank if subcoomponents)",
+          "type": "string",
+          "x-go-name": "Schema"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "ConfigTypeSubcomponent": {
+      "description": "A ConfigTypeSubcomponent is the object that includes a \"name\" field which generates the config name in timemachine.\nIt links to the configtype with the config_type_id.",
+      "type": "object",
+      "title": "ConfigTypeSubcomponent ties subcomponents to a configtype.",
+      "required": [
+        "name",
+        "config_type_id"
+      ],
+      "properties": {
+        "config_type_id": {
+          "description": "ConfigTypeID of the associated parent.  Required.",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ConfigTypeID"
+        },
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name Fully Qualified Domain Name, Required and Unique",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "notes": {
+          "description": "Notes on the ConfigTypeSubcomponent",
+          "type": "string",
+          "x-go-name": "Notes"
+        },
+        "schema": {
+          "description": "schema for configtype (blank if subcoomponents)",
+          "type": "string",
+          "x-go-name": "Schema"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "Device": {
+      "description": "A Device is the object that includes a \"fqdn\" field which is required, and an ipv4 address.  Physical devices are expected to use the ipv4 to lcoate the IPI or iDRAC.\nA device can be given a class, useful for enabling the configuration export (time machine/compare) functionality.\n\nA device can be \"Physical\" or \"Virtual\", \"enabled\" or not, \"Production\" or \"Not Production\".",
+      "type": "object",
+      "title": "Device represents a Physical or Virtual Device.  Devices align to sites, regions, racks, and other types.",
+      "required": [
+        "fqdn",
+        "site_id",
+        "device_class_id"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "device_class_id": {
+          "description": "Device Class ID of the class associated with device",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "DeviceClassID"
+        },
+        "enabled": {
+          "description": "Enabled True or False.  If its not enabled it should not show up in any searches or exporters.",
+          "type": "boolean",
+          "x-go-name": "Enabled"
+        },
+        "fqdn": {
+          "description": "Fqdn Fully Qualified Domain Name, Required and Unique",
+          "type": "string",
+          "x-go-name": "Fqdn"
+        },
+        "git_url": {
+          "description": "Git URL is a field that the tracks the repository for the specific device.",
+          "type": "string",
+          "x-go-name": "GitURL"
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "ipv4": {
+          "description": "Primary ipv4 address.  If it's a phyiscal device this should be the IPI/iDRAC/iLO interface ip.",
+          "type": "string",
+          "x-go-name": "Ipv4"
+        },
+        "management_ipv4": {
+          "description": "Management Address.  AKA IPI/iDRAC/iLO",
+          "type": "string",
+          "x-go-name": "ManagementIpv4"
+        },
+        "notes": {
+          "description": "Notes on the Device",
+          "type": "string",
+          "x-go-name": "Notes"
+        },
+        "physical": {
+          "description": "Physical True or False - If physical false it's a virtual device",
+          "type": "boolean",
+          "x-go-name": "Physical"
+        },
+        "production": {
+          "description": "Production True or False.  If false it's a non-prod device.",
+          "type": "boolean",
+          "x-go-name": "Production"
+        },
+        "rack_units": {
+          "description": "Rack Units of the Device.  0 if Virtual.",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "RackUnits"
+        },
+        "remote_id": {
+          "description": "Remote ID is used for tying into external systems.  This can be a single ID or a KV pair",
+          "type": "string",
+          "x-go-name": "RemoteID"
+        },
+        "serial_number": {
+          "description": "Serial Number of Asset Tag for the Device, If Applicable.  Can be used to store VM object ID.",
+          "type": "string",
+          "x-go-name": "SerialNumber"
+        },
+        "site_id": {
+          "description": "Site ID that device is associated with",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "SiteID"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "DeviceClass": {
+      "description": "DeviceClass a struct to rep DeviceClass",
+      "type": "object",
+      "required": [
+        "name",
+        "vendor"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description if needed for the device class",
+          "type": "string",
+          "x-go-name": "Description"
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Device Class",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        },
+        "vendor": {
+          "description": "Vendor for the Device Class like Dell",
+          "type": "string",
+          "x-go-name": "Vendor"
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "DeviceGroup": {
+      "description": "DeviceGroup is a struct to create groups for devicegroups",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of DeviceGroup Group",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "notes": {
+          "description": "Notes for DeviceGroup Group",
+          "type": "string",
+          "x-go-name": "Notes"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "DeviceGroupLookup": {
+      "description": "DeviceGroupLookup is a struct to group devicegroups",
+      "type": "object",
+      "required": [
+        "device_id",
+        "device_group_id"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "device_group_id": {
+          "description": "DeviceGroup group id",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "DeviceGroupID"
+        },
+        "device_id": {
+          "description": "device_id of the device",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "DeviceID"
+        },
+        "group_name": {
+          "description": "Group name of group",
+          "type": "string",
+          "x-go-name": "GroupName",
+          "readOnly": true
+        },
+        "host_name": {
+          "description": "Hostname (FQDN) of the Associated Device",
+          "type": "string",
+          "x-go-name": "HostName",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "DeviceVar": {
+      "description": "A DeviceVar is the object that represents a variable that applies to a specific device\nA DeviceVar can have a Name and associated value.",
+      "type": "object",
+      "title": "DeviceVar is a variable assigned to a specific device.",
+      "required": [
+        "name",
+        "value",
+        "device_id"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "device_id": {
+          "description": "Associated Device of the Variable",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "DeviceID"
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Variable",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Value of the Variable",
+          "type": "string",
+          "x-go-name": "Value"
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "Event": {
+      "description": "An event will have a message, severity, and aligned device_id.  This will be used to integrate with 3rd party systems.",
+      "type": "object",
+      "title": "Event represents a event/alert or message that aligns to a device.",
+      "required": [
+        "message",
+        "device_id"
+      ],
+      "properties": {
+        "complete": {
+          "type": "boolean",
+          "x-go-name": "Complete"
+        },
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "device_id": {
+          "description": "Device ID that message is associated with it",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "DeviceID"
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Message",
+          "type": "string",
+          "x-go-name": "Message"
+        },
+        "severity": {
+          "description": "Severity ; 0=Healthy, 1=Notice, 2=Info, 3=Audit, 4=Minor, 5=major,6=Critical",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Severity"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "Exporter": {
+      "type": "object",
+      "title": "Exporter record represents the configuration and 'glue' for the exporter itself.",
+      "required": [
+        "name",
+        "url",
+        "config_type_id",
+        "site_id"
+      ],
+      "properties": {
+        "config_type_id": {
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ConfigTypeID"
+        },
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "is_config_exporter": {
+          "description": "IsConfigExporter determins if it is a configuration exporter: Can be both",
+          "type": "boolean",
+          "x-go-name": "IsConfigExporter"
+        },
+        "is_monitoring_exporter": {
+          "description": "IsMonitoringExporter determines if it has monitoring endpoints: Can be both",
+          "type": "boolean",
+          "x-go-name": "IsMonitoringExporter"
+        },
+        "name": {
+          "description": "Friendly name of the exporter",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "notes": {
+          "description": "Notes on the exporter",
+          "type": "string",
+          "x-go-name": "Notes"
+        },
+        "schema": {
+          "description": "Schema of the exporter",
+          "type": "string",
+          "x-go-name": "Schema"
+        },
+        "site_id": {
+          "description": "Site ID that exporter is associated with",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "SiteID"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        },
+        "url": {
+          "description": "URL that allows to locate the exporter itself.",
+          "type": "string",
+          "x-go-name": "URL"
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "GroupVar": {
+      "description": "GroupVar object that includes relevant fields to assign variables to device groups",
+      "type": "object",
+      "required": [
+        "name",
+        "value",
+        "device_group_id"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "device_group_id": {
+          "description": "Device Group ID of the gropu this variable is assigned to.",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "DeviceGroupID"
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the variable assigned to the group (KEY)",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Value of the variable",
+          "type": "string",
+          "x-go-name": "Value"
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "LoginResponse": {
+      "description": "LoginResponse returned when login endpoint called",
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "description": "Access token, Standard JWT",
+          "type": "string",
+          "x-go-name": "AccessToken"
+        },
+        "message": {
+          "description": "Message indicating succcess or failure and why",
+          "type": "string",
+          "x-go-name": "Message"
+        },
+        "status": {
+          "description": "True or False indicating success or failure",
+          "type": "boolean",
+          "x-go-name": "Status"
+        },
+        "user_id": {
+          "description": "UserID which is the account passed to login with",
+          "type": "string",
+          "x-go-name": "UserID"
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "Rack": {
+      "description": "A rack is the object that includes a \"name\" field which is useful for storing logical rack names.\nIt also links to rackassignments as a parent.",
+      "type": "object",
+      "title": "Rack represents a Physical Rack.  It allows tracking rack location and rack assignments for physical devices.",
+      "required": [
+        "name",
+        "rack_location",
+        "site_id"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name is the Logical Name of the Rack",
+          "type": "string",
+          "x-go-name": "Name",
+          "example": "Rack 1"
+        },
+        "notes": {
+          "description": "Additional Notes, if needed, on the rack.",
+          "type": "string",
+          "x-go-name": "Notes"
+        },
+        "rack_location": {
+          "description": "Location of the Rack (Designed to take the X/Y coordinates).  No format required.",
+          "type": "string",
+          "x-go-name": "RackLocation"
+        },
+        "site_id": {
+          "description": "The site the physical rack is located in",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "SiteID"
+        },
+        "total_u": {
+          "description": "The total number of U in a specific rack.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "x-go-name": "TotalU"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "RackAssignment": {
+      "description": "A Rack assignment gets a rack_id, device_id, and position to create the record.  It looks up the FQDN and Total_U from the device that is passed.\n\nA return of the PRIMARY location (aka the passed position) record",
+      "type": "object",
+      "title": "RackAssignment represents an assignment of a physical device to a rack.",
+      "required": [
+        "position"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "device_id": {
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "DeviceID"
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "is_primary_location": {
+          "type": "boolean",
+          "x-go-name": "IsPrimaryLocation",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name",
+          "readOnly": true
+        },
+        "notes": {
+          "type": "string",
+          "x-go-name": "Notes"
+        },
+        "position": {
+          "description": "Position is the U number of the bottom of the device",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "x-go-name": "Position"
+        },
+        "rack_id": {
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "RackID"
+        },
+        "rack_name": {
+          "type": "string",
+          "x-go-name": "RackName",
+          "readOnly": true
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "Region": {
+      "description": "A Region gets a Name and optionally a Remote_ID",
+      "type": "object",
+      "title": "Region is an object that groups sites and provides the ability to link variables.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Region",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "remote_id": {
+          "description": "Optional ID for the region to facilitate 3rd Party Integrations",
+          "type": "string",
+          "x-go-name": "RemoteID"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "RegionVar": {
+      "description": "RegionVar a struct to rep RegionVar",
+      "type": "object",
+      "required": [
+        "name",
+        "value",
+        "region_id"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Variable, must be unique within the region",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "region_id": {
+          "description": "RegionID of the Associated Region for the Variable",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "RegionID"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Value of the Variable",
+          "type": "string",
+          "x-go-name": "Value"
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "Site": {
+      "description": "Site object rep",
+      "type": "object",
+      "required": [
+        "name",
+        "region_id"
+      ],
+      "properties": {
+        "address1": {
+          "description": "Address 1 Line",
+          "type": "string",
+          "x-go-name": "Address1"
+        },
+        "address2": {
+          "description": "Address 2 Line",
+          "type": "string",
+          "x-go-name": "Address2"
+        },
+        "address3": {
+          "description": "Address 3 Line",
+          "type": "string",
+          "x-go-name": "Address3"
+        },
+        "address4": {
+          "description": "Address 4 Line",
+          "type": "string",
+          "x-go-name": "Address4"
+        },
+        "country": {
+          "description": "Country name spelled out",
+          "type": "string",
+          "x-go-name": "Country"
+        },
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "default_timezone": {
+          "description": "Default Timezone is the default timezone for kit in the site",
+          "type": "string",
+          "x-go-name": "DefaultTimezone"
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "is_primary": {
+          "description": "Is Primary determines if this site is a primary site",
+          "type": "boolean",
+          "x-go-name": "IsPrimary"
+        },
+        "latitude": {
+          "description": "Latitude for future mapping",
+          "type": "string",
+          "x-go-name": "Latitude"
+        },
+        "locality": {
+          "description": "Locality",
+          "type": "string",
+          "x-go-name": "Locality"
+        },
+        "longitude": {
+          "description": "Longitude for future mapping",
+          "type": "string",
+          "x-go-name": "Longitude"
+        },
+        "name": {
+          "description": "Name of the Site",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "postcode": {
+          "description": "Postcode or zipcode where appropriate",
+          "type": "string",
+          "x-go-name": "Postcode"
+        },
+        "region_id": {
+          "description": "Region Id of the region this site belongs to",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "RegionID"
+        },
+        "remote_id": {
+          "description": "Remote Id for 3rd party systems Integration",
+          "type": "string",
+          "x-go-name": "RemoteID"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "SiteVar": {
+      "description": "SiteVar a struct to rep SiteVar",
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the variable",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "site_id": {
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "SiteID"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Value for the variable",
+          "type": "string",
+          "x-go-name": "Value"
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "Tag": {
+      "description": "A Tag is the object that represents a label that can be attached to any object.\nA Tag can have a Name and associated description.",
+      "type": "object",
+      "title": "Tag represents a label that can be created and applied to devices, groups, networks, etc.",
+      "required": [
+        "name",
+        "description"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description of the Variable",
+          "type": "string",
+          "x-go-name": "Description"
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Tag",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "TagAssignment": {
+      "description": "A TagAssignment is the object that represents a label that can be attached to any object.\nA TagAssignment can have a Name and associated description.",
+      "type": "object",
+      "title": "TagAssignment represents a label that is assigned to a specific thing",
+      "required": [
+        "tag_id",
+        "target_id",
+        "target_type"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Created At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Unique Identifier of the object",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID",
+          "readOnly": true
+        },
+        "tag_id": {
+          "description": "TagID of the Tag",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "TagID"
+        },
+        "target_id": {
+          "description": "Target ID aka ID of the target device, group, var, fact, etc.",
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "TargetID"
+        },
+        "target_type": {
+          "description": "Target Type akak is the target a device, group, etc. Cause I'm not phsycic it makes it easier to figure out later.",
+          "type": "string",
+          "maxLength": 50,
+          "x-go-name": "TargetType"
+        },
+        "updated_at": {
+          "description": "Updated At timestamp which is automatically generated",
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt",
+          "readOnly": true
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    },
+    "UUID": {
+      "type": "array",
+      "title": "UUID is an array type to represent the value of a UUID, as defined in RFC-4122.",
+      "items": {
+        "type": "integer",
+        "format": "uint8"
+      },
+      "x-go-package": "github.com/gofrs/uuid"
+    },
+    "UserLogin": {
+      "description": "UserLogin Schema for the Login Endpoint",
+      "type": "object",
+      "properties": {
+        "Email": {
+          "description": "Username to login using (UPN or email)",
+          "type": "string"
+        },
+        "Password": {
+          "description": "Password string to hand to login",
+          "type": "string"
+        }
+      },
+      "x-go-package": "dtmscp-db/models"
+    }
+  },
+  "responses": {
+    "accountRes": {
+      "description": "Account response payload",
+      "schema": {
+        "$ref": "#/definitions/Account"
+      }
+    },
+    "badReq": {
+      "description": "Error Bad Request",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 400 -  Bad Request",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "message": {
+            "description": "Message returned giving detail to status field",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "status": {
+            "description": "Field that indicates if it worked (true) or didn't (false)\nDefault to True",
+            "type": "boolean",
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "configTypeResp": {
+      "description": "ConfigType response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/ConfigType"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "configTypeSubcomponentResp": {
+      "description": "ConfigTypeSubcomponent response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/ConfigTypeSubcomponent"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "configTypeSubcomponentsResp": {
+      "description": "ConfigTypeSubcomponent response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ConfigTypeSubcomponent"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "configTypesResp": {
+      "description": "ConfigType response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ConfigType"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "createdResp": {
+      "description": "Success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 201 - Created",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          }
+        }
+      }
+    },
+    "deletedResp": {
+      "description": "Success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Ok",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "message": {
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "status": {
+            "type": "boolean",
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "deviceClassResp": {
+      "description": "DeviceClass response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/DeviceClass"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "deviceClassesResp": {
+      "description": "DeviceClass response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DeviceClass"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "deviceGroupLookupRes": {
+      "description": "DeviceGroupLookup response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/DeviceGroupLookup"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "deviceGroupResp": {
+      "description": "DeviceGroup response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/DeviceGroup"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "deviceGroupsResp": {
+      "description": "DeviceGroup response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DeviceGroup"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "deviceResp": {
+      "description": "Device response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/Device"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "deviceVarResp": {
+      "description": "DeviceVar response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/DeviceVar"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "deviceVarsResp": {
+      "description": "DeviceVar response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DeviceVar"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "devicesResp": {
+      "description": "Device response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Device"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "eventResp": {
+      "description": "Event response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/Event"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "eventsResp": {
+      "description": "Event response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of Events",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Event"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "exporterResp": {
+      "description": "Exporter response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/Exporter"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "exportersResp": {
+      "description": "Exporter response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Exporter"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "groupVarResp": {
+      "description": "GroupVar response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/GroupVar"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "groupVarsResp": {
+      "description": "GroupVar response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of groupvar model",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/GroupVar"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "loginRes": {
+      "description": "LoginResponse response payload",
+      "schema": {
+        "$ref": "#/definitions/LoginResponse"
+      }
+    },
+    "noContentReq": {
+      "description": "Error No Content",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 204 - No Content",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          }
+        }
+      }
+    },
+    "notFoundReq": {
+      "description": "Error Not Found",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 404 -  Not Found",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          }
+        }
+      }
+    },
+    "okResp": {
+      "description": "Success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          }
+        }
+      }
+    },
+    "rackAssignmentResp": {
+      "description": "RackAssignment response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/RackAssignment"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "rackAssignmentsResp": {
+      "description": "RackAssignment response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RackAssignment"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "rackResp": {
+      "description": "Rack response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/Rack"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "racksResp": {
+      "description": "Rack response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Rack"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "regionResp": {
+      "description": "Region response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/Region"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "regionVarResp": {
+      "description": "RegionVar response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/RegionVar"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "regionVarsResp": {
+      "description": "RegionVar response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of groupvar model",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RegionVar"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "regionsResp": {
+      "description": "Region response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of site model",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Region"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "siteRes": {
+      "description": "Site response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/Site"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "siteVarResp": {
+      "description": "SiteVar response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/SiteVar"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "siteVarsResp": {
+      "description": "SiteVar response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SiteVar"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "sitesRes": {
+      "description": "Site response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Site"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "tagAssignmentResp": {
+      "description": "TagAssignment response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/TagAssignment"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "tagAssignmentsResp": {
+      "description": "TagAssignment response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TagAssignment"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "tagResp": {
+      "description": "Tag response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/Tag"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    },
+    "tagsResp": {
+      "description": "Tag response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of sites",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Tag"
+            },
+            "x-go-name": "Data"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "success": {
+            "description": "Returns True if it completes False if it fails",
+            "type": "boolean",
+            "x-go-name": "Success"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}
